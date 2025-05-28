@@ -1,5 +1,4 @@
-[
-    {
+{
         "nama": "Ririn",
         "umur":  21,
         "nim": "2217020031",
@@ -12,19 +11,4 @@
         "pembimbing1": "Raju Wandira",
         "pembimbing2": "Erik Doank"
         }
-    },
-    {
-        "nama": "Afifah",
-        "umur":  21,
-        "nim": "2217020033",
-        "lulus": false,
-        "hobby": [
-            "Travelling",
-            "Shopping"
-        ],
-        "pembimbing": {
-        "pembimbing1": "Raju Wandira",
-        "pembimbing2": "Erik Doank"
-        }
-    }
-]
+}
