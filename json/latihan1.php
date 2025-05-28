@@ -2,7 +2,7 @@
 
 // $tabel_mahasiswa = [
 //     [
-//         "nama" => "Ririn Afifah",
+//         "nama" => "Ririn",
 //         "nim" => "2217020031",
 //         "email" => "ririnafifah021@gmail.com"
 //     ],
