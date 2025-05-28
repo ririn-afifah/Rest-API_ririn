@@ -2,7 +2,7 @@
         "nama": "Ririn",
         "umur":  21,
         "nim": "2217020031",
-        "lulus": false,
+        "lulus": true,
         "hobby": [
             "Healing",
             "Shopping"
