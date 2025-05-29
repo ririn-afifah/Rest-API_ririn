@@ -1,28 +1,37 @@
 <?php
-$curl = curl_init();
-curl_setopt($curl, CURLOPT_URL, 'https://www.googleapis.com/youtube/v3/channels?part=snippet,statistics&id=UC6-vWJhVwNJ_iLVBvNEyKGg&key=AIzaSyBE8P3JBOmbt56YSi8vWw_JZPmxRUWpjIM');
-curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
-$result = curl_exec($curl);
-curl_close($curl);
+function get_CURL($url)
+{
+    $curl = curl_init();
+    curl_setopt($curl, CURLOPT_URL, $url);
+    curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+    $results = curl_exec($curl);
+    curl_close($curl);
 
-$result = json_decode($result, true);
+    return json_decode($results, true);
+}
 
-// Cek apakah data berhasil diambil
-if (isset($result['items'][0])) {
-    $youtubeProfilePic = $result['items'][0]['snippet']['thumbnails']['medium']['url'];
-    $channelName = $result['items'][0]['snippet']['title'];
-    $subscriber = $result['items'][0]['statistics']['subscriberCount'] . ' Subscribers';
+// API key dan channel ID
+$apiKey = 'AIzaSyBE8P3JBOmbt56YSi8vWw_JZPmxRUWpjIM';
+$channelId = 'UC6-vWJhVwNJ_iLVBvNEyKGg';
+
+// Ambil data profil channel
+$channelURL = "https://www.googleapis.com/youtube/v3/channels?part=snippet,statistics&id=$channelId&key=$apiKey";
+$channelResult = get_CURL($channelURL);
+
+if (isset($channelResult['items'][0])) {
+    $youtubeProfilePic = $channelResult['items'][0]['snippet']['thumbnails']['medium']['url'];
+    $channelName = $channelResult['items'][0]['snippet']['title'];
+    $subscriber = $channelResult['items'][0]['statistics']['subscriberCount'] . ' Subscribers';
 } else {
-    $youtubeProfilePic = 'img/default-profile.png'; // fallback image
+    $youtubeProfilePic = 'img/default-profile.png';
     $channelName = 'Channel not found';
     $subscriber = 'No subscriber data';
 }
-?>
+// Ambil video terbaru
+$videoURL = "https://www.googleapis.com/youtube/v3/search?key=$apiKey&channelId=$channelId&maxResults=1&order=date&part=snippet";
+$videoResult = get_CURL($videoURL);
 
-
-$youtubrProfilePic = $result['items'][0]['snippet']['thumbnails']['medium']['url'];
-$channelName = $result['items'][0]['snippet']['title'];
-$subscriber = $result['items'][0]['statistics']['subscriberCount'];
+$latestVideoId = isset($videoResult['items'][0]['id']['videoId']) ? $videoResult['items'][0]['id']['videoId'] : null;
 ?>
 <!doctype html>
 <html lang="en">
@@ -121,7 +130,7 @@ $subscriber = $result['items'][0]['statistics']['subscriberCount'];
           <div class="col">
             <div class="embed-responsive embed-responsive-16by9">
               <iframe class="embed-responsive-item" 
-                      src="https://www.youtube.com/embed/wqx47Z129d4?rel=0" 
+                      src="https://www.youtube.com/embed/<?= $latestVideoId; ?>?rel=0" 
                       allowfullscreen></iframe>
             </div>
           </div>
