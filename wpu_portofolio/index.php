@@ -83,10 +83,11 @@
           <div class="col-md-5">
             <div class="row">
               <div class="col-md-4">
-                <img src="img/profile1.png" width="100" class="rounded-circle img-thumbnail">
+                <img src="img/profile1.png" width="200" class="rounded-circle img-thumbnail">
               </div>
               <div class="col-md-8">
                 <h5>WebProgrammingUIN</h5>
+                <p>Subscriber 10000</p>
               </div>
             </div>
             <div class="col-md-5"></div>
