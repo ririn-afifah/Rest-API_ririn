@@ -90,10 +90,20 @@
                 <p>Subscriber 10000</p>
               </div>
             </div>
+            <div class="row">
+              <div class="col">
+              <div class="embed-responsive embed-responsive-16by9">
+              <iframe class="embed-responsive-item" 
+              src="https://www.youtube.com/embed/wqx47Z129d4?rel=0" 
+              allowfullscreen></iframe>
+</div>
+              </div>
+            </div>
+            </div>
             <div class="col-md-5"></div>
           </div>
        </div> 
-     </section>
+  </section>
 
 
 
