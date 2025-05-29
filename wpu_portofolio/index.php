@@ -90,7 +90,7 @@
                 <p>Subscriber 10000</p>
               </div>
             </div>
-            <div class="row">
+            <div class="row mt-3 pb-3">
               <div class="col">
               <div class="embed-responsive embed-responsive-16by9">
               <iframe class="embed-responsive-item" 
