@@ -100,22 +100,23 @@
               </div>
             </div>
             </div>
-            <div class="col-md-5">
-              <div class="row">
-                <div class="col-md-4">
-                  <img src="img/profile1.png" width="200" class="rounded-circle img-thumbnail">
-                  <div class="col-md-8">
-                    <h5>@cookiey_daughh</h5>
-                    <p>202 Followers</p>
-                  </div>
-                </div>
+            <div class="col-md-8">
+              <h5>@cookiey_daughh</h5>
+              <p>202 Followers</p>
+            </div>
+          </div>
+            
+          <div class="row mt-3 pb-3">
+            <div class="col">
+              <div class="ig-thumbnail">
+                <img src="img/thumbs/1.png">
               </div>
-
-              <div class="row">
-                <div class="col">
-                  <div class="ig-thumbnail">
-                    <img src="img/thumbs/1.png">
-                  </div>
+              <div class="ig-thumbnail">
+                <img src="img/thumbs/2.png">
+              </div>
+              <div class="ig-thumbnail">
+                <img src="img/thumbs/3.png">
+              </div>
             </div>
           </div>
        </div> 
