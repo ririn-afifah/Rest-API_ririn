@@ -73,7 +73,7 @@
      <section class="social" id="social">
       <div class="container">
         <div class="row">
-          <div class="col">
+          <div class="col text-center">
             <h2>Social Media</h2>
      </section>
 
