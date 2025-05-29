@@ -83,14 +83,14 @@
           <div class="col-md-5">
             <div class="row">
               <div class="col-md-4">
-                <img src="img/profile1.png" width="100">
+                <img src="img/profile1.png" width="100" class="rounded-circle img-thumbnail">
               </div>
-              <div class="col-md-8"></div>
+              <div class="col-md-8">
+                <h5>WebProgrammingUIN</h5>
+              </div>
             </div>
-            <h5>WebProgrammingUIN</h5>
+            <div class="col-md-5"></div>
           </div>
-          <div class="col-md-5"></div>
-        </div>
        </div> 
      </section>
 
