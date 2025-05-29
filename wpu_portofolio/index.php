@@ -60,6 +60,7 @@
         </div>
         <div class="row justify-content-center">
           <div class="col-md-5">
+            <div class="row"></div>
             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Natus, molestiae sunt doloribus error ullam expedita cumque blanditiis quas vero, qui, consectetur modi possimus. Consequuntur optio ad quae possimus, debitis earum.</p>
           </div>
           <div class="col-md-5">
@@ -75,6 +76,22 @@
         <div class="row pt-4 mb-4">
           <div class="col text-center">
             <h2>Social Media</h2>
+          </div>
+        </div>
+
+        <div class="row justify-content-center">
+          <div class="col-md-5">
+            <div class="row">
+              <div class="col-md-4">
+                <img src="img/profile1.png" width="100">
+              </div>
+              <div class="col-md-8"></div>
+            </div>
+            <h5>WebProgrammingUIN</h5>
+          </div>
+          <div class="col-md-5"></div>
+        </div>
+       </div> 
      </section>
 
 
