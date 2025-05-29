@@ -3,15 +3,26 @@ $curl = curl_init();
 curl_setopt($curl, CURLOPT_URL, 'https://www.googleapis.com/youtube/v3/channels?part=snippet,statistics&id=UC6-vWJhVwNJ_iLVBvNEyKGg&key=AIzaSyBE8P3JBOmbt56YSi8vWw_JZPmxRUWpjIM');
 curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
 $result = curl_exec($curl);
-curl_close($curl); // <== Perbaikan di sini
+curl_close($curl);
 
 $result = json_decode($result, true);
-var_dump($result);
+
+// Cek apakah data berhasil diambil
+if (isset($result['items'][0])) {
+    $youtubeProfilePic = $result['items'][0]['snippet']['thumbnails']['medium']['url'];
+    $channelName = $result['items'][0]['snippet']['title'];
+    $subscriber = $result['items'][0]['statistics']['subscriberCount'] . ' Subscribers';
+} else {
+    $youtubeProfilePic = 'img/default-profile.png'; // fallback image
+    $channelName = 'Channel not found';
+    $subscriber = 'No subscriber data';
+}
 ?>
 
+
 $youtubrProfilePic = $result['items'][0]['snippet']['thumbnails']['medium']['url'];
-
-
+$channelName = $result['items'][0]['snippet']['title'];
+$subscriber = $result['items'][0]['statistics']['subscriberCount'];
 ?>
 <!doctype html>
 <html lang="en">
@@ -32,7 +43,7 @@ $youtubrProfilePic = $result['items'][0]['snippet']['thumbnails']['medium']['url
 
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
       <div class="container">
-        <a class="navbar-brand" href="#home">Sandhika Galih</a>
+        <a class="navbar-brand" href="#home">Ririn Afifah</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -57,8 +68,8 @@ $youtubrProfilePic = $result['items'][0]['snippet']['thumbnails']['medium']['url
       <div class="container">
         <div class="text-center">
           <img src="img/profile1.png" class="rounded-circle img-thumbnail">
-          <h1 class="display-4">Sandhika Galih</h1>
-          <h3 class="lead">Lecturer | Programmer | Youtuber</h3>
+          <h1 class="display-4">Ririn Afifah</h1>
+          <h3 class="lead">Student | Programmer | Youtuber</h3>
         </div>
       </div>
     </div>
@@ -99,11 +110,11 @@ $youtubrProfilePic = $result['items'][0]['snippet']['thumbnails']['medium']['url
       <div class="col-md-5">
         <div class="row mb-3">
           <div class="col-md-4">
-            <img src="<?= $youtubeProfilePi;?>" width="200" class="rounded-circle img-thumbnail">
+            <img src="<?= $youtubeProfilePic;?>" width="200" class="rounded-circle img-thumbnail">
           </div>
           <div class="col-md-8">
-            <h5>WebProgrammingUIN</h5>
-            <p>1000 Subscriber.</p>
+            <h5><?= $channelName; ?></h5>
+            <p><?= $subscriber; ?></p>
           </div>
         </div>
         <div class="row">
@@ -125,7 +136,7 @@ $youtubrProfilePic = $result['items'][0]['snippet']['thumbnails']['medium']['url
           </div>
           <div class="col-md-8">
             <h5>@cookiey_daughh</h5>
-            <p>202 Followers.</p>
+            <p>202 Followers</p>
           </div>
         </div>
         <div class="row">
@@ -145,8 +156,7 @@ $youtubrProfilePic = $result['items'][0]['snippet']['thumbnails']['medium']['url
     </div>
   </div>
 
-    <!-- Portfolio -->
-    <!-- Portfolio -->
+<!-- Portfolio -->
 <section class="portfolio bg-dark" id="portfolio">
   <div class="container">
     <div class="row pt-4 mb-4">
