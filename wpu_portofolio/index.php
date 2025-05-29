@@ -50,6 +50,7 @@
 
 
     <!-- About -->
+
     <section class="about" id="about">
       <div class="container">
         <div class="row mb-4">
@@ -68,9 +69,18 @@
       </div>
     </section>
 
+    <!-- Youtube & IG -->
+     <section class="social" id="social">
+      <div class="container">
+        <div class="row">
+          <div class="col">
+            <h2>Social Media</h2>
+     </section>
+
+
 
     <!-- Portfolio -->
-    <section class="portfolio bg-light" id="portfolio">
+    <section class="portfolio bg-dark" id="portfolio">
       <div class="container">
         <div class="row pt-4 mb-4">
           <div class="col text-center">
