@@ -9,6 +9,8 @@ $result = json_decode($result, true);
 var_dump($result);
 ?>
 
+$youtubrProfilePic = $result['items'][0]['snippet']['thumbnails']['medium']['url'];
+
 
 ?>
 <!doctype html>
@@ -84,7 +86,6 @@ var_dump($result);
     </section>
 
     <!-- Youtube & IG -->
-     <!-- Youtube & IG -->
 <section class="social bg-light" id="social">
   <div class="container">
     <div class="row pt-4 mb-4">
@@ -98,7 +99,7 @@ var_dump($result);
       <div class="col-md-5">
         <div class="row mb-3">
           <div class="col-md-4">
-            <img src="img/profile1.png" width="200" class="rounded-circle img-thumbnail">
+            <img src="<?= $youtubeProfilePi;?>" width="200" class="rounded-circle img-thumbnail">
           </div>
           <div class="col-md-8">
             <h5>WebProgrammingUIN</h5>
