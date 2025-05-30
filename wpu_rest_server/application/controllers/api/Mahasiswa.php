@@ -1,4 +1,4 @@
-<?php 
+<?php  
 use Restserver\Libraries\REST_Controller;
 
 defined('BASEPATH') OR exit('No direct script access allowed');
@@ -35,5 +35,25 @@ class Mahasiswa extends REST_Controller
                 'message' => 'Data tidak ditemukan'
             ], REST_Controller::HTTP_NOT_FOUND);
         }
+    }
+
+    public function index_delete()
+    {
+        $id = $this->delete('id');
+
+        if ($id === null) {
+            $this->response([
+                'status' => false,
+                'message' => 'Provide an ID!'
+            ], REST_Controller::HTTP_BAD_REQUEST);
+        }
+
+        // Anda bisa menambahkan logika penghapusan data di sini
+        // contoh:
+        // if ($this->Mahasiswa_model->deleteMahasiswa($id)) {
+        //     $this->response(['status' => true, 'id' => $id, 'message' => 'Deleted'], REST_Controller::HTTP_NO_CONTENT);
+        // } else {
+        //     $this->response(['status' => false, 'message' => 'ID not found'], REST_Controller::HTTP_BAD_REQUEST);
+        // }
     }
 }
