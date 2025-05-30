@@ -14,6 +14,7 @@ class Mahasiswa extends REST_Controller
         $this->load->model('Mahasiswa_model');
     }
 
+    // Ambil data (GET)
     public function index_get()
     {
         $id = $this->get('id');
@@ -37,6 +38,7 @@ class Mahasiswa extends REST_Controller
         }
     }
 
+    // Hapus data (DELETE)
     public function index_delete()
     {
         $id = $this->delete('id');
@@ -44,16 +46,24 @@ class Mahasiswa extends REST_Controller
         if ($id === null) {
             $this->response([
                 'status' => false,
-                'message' => 'Provide an ID!'
-            ], REST_Controller::HTTP_BAD_REQUEST);
+                'message' => 'ID harus disediakan'
+            ], REST_Controller::HTTP_BAD_REQUEST); // 400
+            return;
         }
 
-        // Anda bisa menambahkan logika penghapusan data di sini
-        // contoh:
-        // if ($this->Mahasiswa_model->deleteMahasiswa($id)) {
-        //     $this->response(['status' => true, 'id' => $id, 'message' => 'Deleted'], REST_Controller::HTTP_NO_CONTENT);
-        // } else {
-        //     $this->response(['status' => false, 'message' => 'ID not found'], REST_Controller::HTTP_BAD_REQUEST);
-        // }
+        if ($this->Mahasiswa_model->deleteMahasiswa($id) > 0) {
+            // Data berhasil dihapus
+            $this->response([
+                'status' => true,
+                'id' => $id,
+                'message' => 'Data berhasil dihapus'
+            ], REST_Controller::HTTP_NO_CONTENT); // 204
+        } else {
+            // ID tidak ditemukan
+            $this->response([
+                'status' => false,
+                'message' => 'ID tidak ditemukan'
+            ], REST_Controller::HTTP_NOT_FOUND); // 404
+        }
     }
 }
