@@ -27,11 +27,24 @@ if (isset($channelResult['items'][0])) {
     $channelName = 'Channel not found';
     $subscriber = 'No subscriber data';
 }
+
 // Ambil video terbaru
 $videoURL = "https://www.googleapis.com/youtube/v3/search?key=$apiKey&channelId=$channelId&maxResults=1&order=date&part=snippet";
 $videoResult = get_CURL($videoURL);
 
 $latestVideoId = isset($videoResult['items'][0]['id']['videoId']) ? $videoResult['items'][0]['id']['videoId'] : null;
+
+// Instagram API
+$accessToken = 'IGAAXhgawiBOJBZAE1ZAS1dFMndiY2dRRFJCM0JRdzgwWDAwWlZAnLVFVSjl6aGdGQk1mcDVhT0JQNUFFLXdqMDE5NVhrLW14NG56SkpaZAnhhZAUFmRElIYTlXU2NRc0V3QUpsam80U1c3UENQeW81NEVIOHJJNTVmTGlmTVllbUo5WQZDZD';
+
+$instagramURL = "https://graph.instagram.com/me?fields=username,profile_picture_url,followers_count&access_token=$accessToken";
+$instaResult = get_CURL($instagramURL);
+
+$usernameIG = isset($instaResult['username']) ? $instaResult['username'] : 'Unknown';
+$profilePictureIG = isset($instaResult['profile_picture_url']) ? $instaResult['profile_picture_url'] : 'img/default-profile.png';
+$followersIG = isset($instaResult['followers_count']) ? $instaResult['followers_count'] . ' Followers' : 'No data';
+?>
+
 ?>
 <!doctype html>
 <html lang="en">
@@ -113,9 +126,11 @@ $latestVideoId = isset($videoResult['items'][0]['id']['videoId']) ? $videoResult
         <h2>Social Media</h2>
       </div>
     </div>
-
+    
+    
     <div class="row justify-content-center">
-      <!-- YouTube -->
+      
+    <!-- YouTube -->
       <div class="col-md-5">
         <div class="row mb-3">
           <div class="col-md-4">
@@ -139,39 +154,40 @@ $latestVideoId = isset($videoResult['items'][0]['id']['videoId']) ? $videoResult
       </div>
 
       <!-- Instagram -->
-      <div class="col-md-5">
-        <div class="row mb-3">
-          <div class="col-md-4">
-            <img src="img/profile1.png" width="200" class="rounded-circle img-thumbnail">
-          </div>
-          <div class="col-md-8">
-            <h5>@cookiey_daughh</h5>
-            <p>202 Followers</p>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col d-flex justify-content-between">
-            <div class="ig-thumbnail">
-              <img src="img/thumbs/1.png" width="100">
-            </div>
-            <div class="ig-thumbnail">
-              <img src="img/thumbs/2.png" width="100">
-            </div>
-            <div class="ig-thumbnail">
-              <img src="img/thumbs/3.png" width="100">
-            </div>
-          </div>
-        </div>
+<div class="col-md-5">
+  <div class="row mb-3">
+    <div class="col-md-4">
+      <img src="<?= $profilePictureIG; ?>" alt="<?= $usernameIG; ?>" class="rounded-circle img-thumbnail" width="200">
+    </div>
+    <div class="col-md-8">
+      <h5><?= $usernameIG; ?></h5>
+      <p><?= $followersIG; ?></p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col d-flex justify-content-between">
+      <div class="ig-thumbnail">
+        <img src="img/thumbs/1.png" width="100">
+      </div>
+      <div class="ig-thumbnail">
+        <img src="img/thumbs/2.png" width="100">
+      </div>
+      <div class="ig-thumbnail">
+        <img src="img/thumbs/3.png" width="100">
       </div>
     </div>
   </div>
+</div>
+
 
 <!-- Portfolio -->
 <section class="portfolio bg-dark" id="portfolio">
   <div class="container">
     <div class="row pt-4 mb-4">
       <div class="col text-center">
-        <h2 class="text-light">Portfolio</h2> <!-- Tambahkan class text-light -->
+        <h2 class="text-light">Portfolio</h2> 
+        
+<!-- Tambahkan class text-light -->
       </div>
     </div>
     <div class="row">
@@ -233,6 +249,62 @@ $latestVideoId = isset($videoResult['items'][0]['id']['videoId']) ? $videoResult
     </div>
   </div>
 
+   <!--Contact-->
+    <section class="contact bg-light" id="contact">
+      <div class="container">
+        <div class="row pt-4 mb-4">
+          <div class="col text-center">
+            <h2>Contact</h2>
+          </div>
+        </div>
+
+        <div class="row justify-content-center">
+          <div class="col-lg-4">
+            <div class="card bg-primary text-white mb-4 text-center">
+              <div class="card-body">
+                <h5 class="card-title">Contact Me</h5>
+                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+              </div>
+            </div>
+            
+            <ul class="list-group mb-4">
+              <li class="list-group-item"><h3>Location</h3></li>
+              <li class="list-group-item">My Office</li>
+              <li class="list-group-item">Jl. Setiabudhi No. 193, Bandung</li>
+              <li class="list-group-item">West Java, Indonesia</li>
+            </ul>
+          </div>
+
+          <div class="col-lg-6">
+            
+            <form>
+              <div class="form-group">
+                <label for="nama">Nama</label>
+                <input type="text" class="form-control" id="nama">
+              </div>
+              <div class="form-group">
+                <label for="email">Email</label>
+                <input type="text" class="form-control" id="email">
+              </div>
+              <div class="form-group">
+                <label for="phone">Phone Number</label>
+                <input type="text" class="form-control" id="phone">
+              </div>
+              <div class="form-group">
+                <label for="message">Message</label>
+                <textarea class="form-control" id="message" rows="3"></textarea>
+              </div>
+              <div class="form-group">
+                <button type="button" class="btn btn-primary">Send Message</button>
+              </div>
+            </form>
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+
     <!-- footer -->
     <footer class="bg-dark text-white mt-5">
       <div class="container">
@@ -243,12 +315,6 @@ $latestVideoId = isset($videoResult['items'][0]['id']['videoId']) ? $videoResult
         </div>
       </div>
     </footer>
-
-
-
-
-
-
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
