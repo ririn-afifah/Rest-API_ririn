@@ -34,16 +34,31 @@ $videoResult = get_CURL($videoURL);
 
 $latestVideoId = isset($videoResult['items'][0]['id']['videoId']) ? $videoResult['items'][0]['id']['videoId'] : null;
 
-// Instagram API
-$accessToken = 'IGAAXhgawiBOJBZAE1ZAS1dFMndiY2dRRFJCM0JRdzgwWDAwWlZAnLVFVSjl6aGdGQk1mcDVhT0JQNUFFLXdqMDE5NVhrLW14NG56SkpaZAnhhZAUFmRElIYTlXU2NRc0V3QUpsam80U1c3UENQeW81NEVIOHJJNTVmTGlmTVllbUo5WQZDZD';
+// Instagram Access Token (ganti jika sudah bocor)
+$accessToken = 'IGAAXhgawiBOJBZAE1ZAS1dFMndiY2dRRFJCM0JRdzgwWDAwWlZAnLVFVSjl6aGdGQk1mcDVhT0JQNUFFLXdqMDE5NVhrLW14NG56SkpaZAnhhZAUFmRElIYTlXU2NRc0V3QUpsam80U1c3UENQeW81NEVIOHJJNTVmTGlmTVllbUo5WQZDZD'; // GANTI DENGAN TOKEN YANG BARU!
 
+// Ambil profil Instagram
 $instagramURL = "https://graph.instagram.com/me?fields=username,profile_picture_url,followers_count&access_token=$accessToken";
 $instaResult = get_CURL($instagramURL);
 
-$usernameIG = isset($instaResult['username']) ? $instaResult['username'] : 'Unknown';
-$profilePictureIG = isset($instaResult['profile_picture_url']) ? $instaResult['profile_picture_url'] : 'img/default-profile.png';
-$followersIG = isset($instaResult['followers_count']) ? $instaResult['followers_count'] . ' Followers' : 'No data';
+$usernameIG = $instaResult['username'] ?? 'Unknown';
+$profilePictureIG = $instaResult['profile_picture_url'] ?? 'img/default-profile.png';
+$followersIG = $instaResult['followers_count'] ?? 'No data';
+
+// Ambil media Instagram
+$mediaURL = "https://graph.instagram.com/me/media?fields=id,media_type,media_url,permalink,timestamp&access_token=$accessToken";
+$mediaResult = get_CURL($mediaURL);
+
+$photos = [];
+if (isset($mediaResult['data']) && is_array($mediaResult['data'])) {
+    foreach ($mediaResult['data'] as $media) {
+        if (($media['media_type'] === 'IMAGE' || $media['media_type'] === 'CAROUSEL_ALBUM') && isset($media['media_url'])) {
+            $photos[] = $media;
+        }
+    }
+}
 ?>
+
 
 ?>
 <!doctype html>
@@ -148,10 +163,10 @@ $followersIG = isset($instaResult['followers_count']) ? $instaResult['followers_
               <iframe class="embed-responsive-item" 
                       src="https://www.youtube.com/embed/<?= $latestVideoId; ?>?rel=0" 
                       allowfullscreen></iframe>
+                 </div>
+                </div>
+              </div>
             </div>
-          </div>
-        </div>
-      </div>
 
       <!-- Instagram -->
 <div class="col-md-5">
@@ -161,23 +176,26 @@ $followersIG = isset($instaResult['followers_count']) ? $instaResult['followers_
     </div>
     <div class="col-md-8">
       <h5><?= $usernameIG; ?></h5>
-      <p><?= $followersIG; ?></p>
+      <p><?= $followersIG; ?> Followers</p>
     </div>
   </div>
   <div class="row">
-    <div class="col d-flex justify-content-between">
-      <div class="ig-thumbnail">
-        <img src="img/thumbs/1.png" width="100">
+    <?php if (!empty($photos)): ?>
+      <?php foreach (array_slice($photos, 0, 3) as $photo): ?>
+        <div class="col-4 mb-3">
+          <a href="<?= $photo['permalink']; ?>" target="_blank">
+            <img src="<?= $photo['media_url']; ?>" class="img-fluid rounded" alt="Instagram photo">
+          </a>
+        </div>
+      <?php endforeach; ?>
+    <?php else: ?>
+      <div class="col">
+        <p>No Instagram photos found.</p>
       </div>
-      <div class="ig-thumbnail">
-        <img src="img/thumbs/2.png" width="100">
-      </div>
-      <div class="ig-thumbnail">
-        <img src="img/thumbs/3.png" width="100">
-      </div>
-    </div>
+    <?php endif; ?>
   </div>
 </div>
+
 
 
 <!-- Portfolio -->
