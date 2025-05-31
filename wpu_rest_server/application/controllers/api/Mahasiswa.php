@@ -13,17 +13,10 @@ class Mahasiswa extends REST_Controller
         parent::__construct();
         $this->load->model('Mahasiswa_model');
     }
-
-    // Ambil data (GET)
-    public function index_get()
+      public function index_get()
     {
         $id = $this->get('id');
-
-        if ($id === null) {
-            $mahasiswa = $this->Mahasiswa_model->getMahasiswa();
-        } else {
-            $mahasiswa = $this->Mahasiswa_model->getMahasiswa($id);
-        }
+        $mahasiswa = ($id === null) ? $this->Mahasiswa_model->getMahasiswa() : $this->Mahasiswa_model->getMahasiswa($id);
 
         if ($mahasiswa) {
             $this->response([
@@ -38,7 +31,28 @@ class Mahasiswa extends REST_Controller
         }
     }
 
-    // Hapus data (DELETE)
+    public function index_post()
+    {
+        $data = [
+            'nama' => $this->post('Budi'),
+            'nrp' => $this->post('321654'),
+            'email' => $this->post('budi@example.com'),
+            'jurusan' => $this->post('Sistem Informasi')
+        ];
+
+        if ($this->Mahasiswa_model->createMahasiswa($data) > 0) {
+            $this->response([
+                'status' => true,
+                'message' => 'Data berhasil ditambahkan'
+            ], REST_Controller::HTTP_CREATED);
+        } else {
+            $this->response([
+                'status' => false,
+                'message' => 'Gagal menambahkan data'
+            ], REST_Controller::HTTP_BAD_REQUEST);
+        }
+    }
+
     public function index_delete()
     {
         $id = $this->delete('id');
@@ -47,23 +61,22 @@ class Mahasiswa extends REST_Controller
             $this->response([
                 'status' => false,
                 'message' => 'ID harus disediakan'
-            ], REST_Controller::HTTP_BAD_REQUEST); // 400
+            ], REST_Controller::HTTP_BAD_REQUEST);
             return;
         }
 
-        if ($this->Mahasiswa_model->deleteMahasiswa($id) > 0) {
-            // Data berhasil dihapus
+     if ($this->Mahasiswa_model->deleteMahasiswa($id) > 0) {
             $this->response([
                 'status' => true,
                 'id' => $id,
                 'message' => 'Data berhasil dihapus'
-            ], REST_Controller::HTTP_NO_CONTENT); // 204
+            ], REST_Controller::HTTP_NO_CONTENT);
         } else {
-            // ID tidak ditemukan
+
             $this->response([
                 'status' => false,
                 'message' => 'ID tidak ditemukan'
-            ], REST_Controller::HTTP_NOT_FOUND); // 404
+            ], REST_Controller::HTTP_NOT_FOUND);
         }
     }
 }

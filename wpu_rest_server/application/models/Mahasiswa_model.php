@@ -3,21 +3,24 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Mahasiswa_model extends CI_Model
 {
-    // Method ambil data mahasiswa
-    public function getMahasiswa($id = null)
+        public function getMahasiswa($id = null)
     {
         if ($id === null) {
-            return $this->db->get('mahasiswa')->result_array(); // ambil semua data
+            return $this->db->get('mahasiswa')->result_array(); // ambil semua
         } else {
-            return $this->db->get_where('mahasiswa', ['id' => $id])->row_array(); // ambil berdasarkan ID
+            return $this->db->get_where('mahasiswa', ['id' => $id])->row_array(); // ambil satu
         }
     }
-
-    // Method hapus data mahasiswa
-    public function deleteMahasiswa($id)
+        public function deleteMahasiswa($id)
     {
         $this->db->where('id', $id);
         $this->db->delete('mahasiswa');
-        return $this->db->affected_rows(); // return jumlah baris yang terhapus
+        return $this->db->affected_rows(); // mengembalikan jumlah baris yang terpengaruh
+    }
+
+    public function createMahasiswa($data)
+    {
+        $this->db->insert('mahasiswa', $data);
+        return $this->db->affected_rows();
     }
 }
